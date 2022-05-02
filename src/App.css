@@ -5,6 +5,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+*::-webkit-scrollbar {
+  width: 8px;
+  background-color: grey;
+}
 a {
   text-decoration: inherit;
   color: inherit;
