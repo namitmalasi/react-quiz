@@ -12,13 +12,13 @@ const Home = ({ name, setName, fetchQuestions }) => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     if (!category || !difficulty || !name) {
       setError(true);
       return;
     } else {
       setError(false);
-      fetchQuestions(category, difficulty);
+      await fetchQuestions(category, difficulty);
       navigate("/quiz");
     }
   };

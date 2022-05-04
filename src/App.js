@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer/Footer";
@@ -9,8 +10,18 @@ import Result from "./Pages/Result/Result";
 
 function App() {
   const [name, setName] = useState("");
+  const [questions, setQuestions] = useState();
+  const [score, setScore] = useState(0);
 
-  const fetchQuestions = () => {};
+  const fetchQuestions = async (category = "", difficulty = "") => {
+    const { data } = await axios.get(
+      `https://opentdb.com/api.php?amount=10${
+        category && `&category=${category}`
+      }${difficulty && `&difficulty=${difficulty}`}&type=multiple`
+    );
+
+    setQuestions(data.results);
+  };
   return (
     <BrowserRouter>
       <div className="app" style={{ backgroundImage: "url(./ques1.png)" }}>
@@ -26,8 +37,22 @@ function App() {
               />
             }
           />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/result" element={<Result />} />
+          <Route
+            path="/quiz"
+            element={
+              <Quiz
+                name={name}
+                questions={questions}
+                score={score}
+                setScore={setScore}
+                setQuestions={setQuestions}
+              />
+            }
+          />
+          <Route
+            path="/result"
+            element={<Result name={name} score={score} />}
+          />
         </Routes>
       </div>
       <Footer />
