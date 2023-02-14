@@ -19,4 +19,4 @@
 
 # Links
 
-- Demo live : [Quizio](https://quizio-app.netlify.app/)
+- Live : [Quizio](https://quizio-app.netlify.app/)
